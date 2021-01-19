@@ -1,0 +1,6 @@
+clara21 teste1 81887267911 21 1 0
+gabrielnogs teste2 909099900 42 1 1
+alan teste3 09052190909 32 0 0
+willian teste4 123456784 25 0 0
+edson teste4 12346567 15 0 0
+cris teste4 58558177531 48 1 1
