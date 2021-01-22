@@ -1,13 +1,69 @@
 #include "Profile.h"
 #include <iostream>
+#include <cmath>
 #include <fstream>
 #include <string.h>
 #include <stdio.h>
 #include <conio.h>
+#include <cstdlib>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
+
+//Profile Functions;
+int databasesize()
+{
+    int counter=0;
+    string i,u,p,cp,ag,gd,pt;
+    ifstream input("database.txt");
+    while(input>>i>>u>>p>>cp>>ag>>gd>>pt)
+    {
+        counter++;
+
+    }
+    input.close();
+    return counter;
+}
+
+int databaseidGEN(int sizearray)
+{
+    int id__;
+    int slidearray;
+    int counter = 0;
+    int arrayid[sizearray];
+    string i,u,p,cp,ag,gd,pt;
+
+
+    srand(time(0));
+    ifstream input("database.txt");
+    while(input>>i>>u>>p>>cp>>ag>>gd>>pt)
+    {
+        arrayid[counter] = stoi(i);
+        counter++;
+    }
+    do
+    {
+        id__ = rand() % 100 + 1;
+        slidearray = 0;
+
+        for(int i = 0; i < sizearray; ++i)
+        {
+            if(arrayid[i] != id__)
+            {
+                slidearray++;
+            }
+            else{break;}
+        }
+    } while (slidearray < sizearray-1);
+
+
+    input.close();
+    return id__ ;
+}
 
 Profile::Profile()
 {
+    id=-1;
     strcpy(username,"Insira o nome");
     strcpy(password, "Insira a senha");
     strcpy(cpf, "12345678901");
@@ -66,29 +122,54 @@ void Profile:: createprofile()
     cout << "Digite seu perfil (0 para comprador | 1 para vendedor) " << "\n";
     cin >> profiletype;
 
+    id = databaseidGEN(databasesize());
+
     ofstream reg("database.txt", ios::app);
-    reg<<username<<' '<<password<<' '<<cpf<<' '<<age<<' '<<gender<<' '<<profiletype<< endl;
+    reg<<id<<' '<<username<<' '<<password<<' '<<cpf<<' '<<age<<' '<<gender<<' '<<profiletype<< endl;
     system("cls");
     cout<<"Usuario: ("<<username<<") criado com sucesso\n\n";
 }
 
-void Profile:: login()
+bool Profile:: login()
 {
+    int cont = 0;
+    int ENTER = 13;
+    int TAB = 9;
+    int BKSP = 8;
+	char ch;
+	char pwd[20];
+	char pass[20];
     int count;
-    string user,pass,u,p,cp,ag,gd,pt;
+    string user,i,u,p,cp,ag,gd,pt;
     system("cls");
     cout<<"Por favor insira as informacoes abaixo"<<endl;
-    cout<<"Nome de usuario :";
+    cout<<"Nome de usuario: ";
     cin>>user;
-    cout<<"Senha: ";
-    cin>>pass;
+	cout << "Senha: " ;
+	while(1){
+		ch = getch();
+
+		if(ch == ENTER || ch == TAB){
+			pwd[cont] = '\0';
+			break;
+		}else if(ch == BKSP){
+			if(cont > 0){
+				cont--;
+				printf("\b \b");
+			}
+		}else{
+			pwd[cont++] = ch;
+			printf("* \b");
+		}
+	}
+    strcpy(pass,pwd);
 
     ifstream input("database.txt");
-    while(input>>u>>p>>cp>>ag>>gd>>pt)
+    while(input>>i>>u>>p>>cp>>ag>>gd>>pt)
     {
-        /*cout<<"VALOR U: "<<u<<"VALOR DE P:"<<p<<"VALOR cp: "<<cp<<"VALOR DE ag:"<<ag<<"VALOR gd: "<<gd<<"VALOR DE pt:"<<pt<<"\n";*/
         if(u==user && p==pass)
         {
+            id = stoi(i);
             strcpy(username,u.c_str());
             strcpy(password,p.c_str());
             strcpy(cpf, cp.c_str());
@@ -103,7 +184,7 @@ void Profile:: login()
     input.close();
     if(count==1)
     {
-        cout<<"\nHello "<<user<<"\nSeu Login foi realizado com sucesso\n";
+        cout<<"Seja bem vindo "<<user<<"\nSeu Login foi realizado com sucesso\n"<<"Pressione ENTER para continuar\n";
         cin.get();
         cin.get();
     }
@@ -113,6 +194,8 @@ void Profile:: login()
         cout<<"\nLOGIN ERROR\nPor favor verifique suas credenciais\n";
 
     }
+
+    return profiletype;
 }
 
 void Profile:: showprofile()
@@ -130,7 +213,7 @@ void Profile:: showprofile()
 
     if(profiletype==0)
     {
-        strcpy(profilestring,"Usuario/(a)");
+        strcpy(profilestring,"Comprador/(a)");
     }
     else{strcpy(profilestring,"Vendedor/(a)");}
 
@@ -138,16 +221,17 @@ void Profile:: showprofile()
 
     if(active)
     {
-        cout<<"\n";
+        cout<<"ID: "<<id<<"\n";
         cout<<"Nome de Usuario: "<<username<<"\n";
         cout<<"Numero de CPF: "<<cpf<<"\n";
         cout<<"Idade: "<<age<<"\n";
         cout<<"Genero: "<<genderstring<<"\n";
-        cout<<"Tipo de perfil: "<<profilestring<<"\n\n";
+        cout<<"Tipo de perfil: "<<profilestring<<"\n";
     }
     else{cout<<"Realize Login antes\n\n";}
 }
 
+//Car Functions
 Car::Car()
 {
 
@@ -192,3 +276,23 @@ void Car:: newcar()
     cout<<"Carro: ("<<model<<" " << brand<<") inserido com sucesso\n\n";
 
 }
+
+User::User(Profile per)
+{
+    balance = 2000.00;
+    person = per;
+}
+
+bool User::login()
+{
+    return person.login();
+}
+
+void User:: showprofile()
+{
+    person.showprofile();
+    cout<<"O seu saldo e de RS:"<<balance<<"\n\n";
+}
+
+
+//Utilizar função virtual na chamada do balanço como classe mae para alterar e escrever na classe filha

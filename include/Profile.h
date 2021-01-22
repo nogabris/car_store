@@ -3,10 +3,11 @@
 class Profile
 {
     public:
+        int id;
         Profile();
         virtual ~Profile();
         void createprofile();
-        void login();
+        bool login();
         void showprofile();
 
 
@@ -30,7 +31,6 @@ class Car
         void newcar();
 
 
-
     private:
         char model[20];
         char brand[20];
@@ -43,4 +43,20 @@ class Car
         char state[20];
 
 };
+
+class User: public Profile
+{
+    public:
+        User(Profile per);
+        void showprofile();
+        bool login();
+        //+changeuserinfo()
+        //+listcar()
+        //+neworder()
+
+    private:
+        float balance;
+        Profile person;
+
+} ;
 
