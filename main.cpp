@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     int run = 1;
-    int choice,choice2;
+    int choice,choice2,choice3;
     Profile custom;
 
     while(run)
@@ -34,6 +34,7 @@ int main()
                 pessoa.createprofile();
                 break;
             }
+
             case 2:
             {
                 system("cls");
@@ -44,10 +45,34 @@ int main()
                 {
                     case 0:
                     {
-                        User usuario(custom);
-                        if(usuario.login() == 0)
+                        User buyer(custom);
+                        if(buyer.login() == 0)
                         {
-                            usuario.showprofile();
+                            buyer.showprofile();
+                            buyer.attbalance();
+                            cout<<"Selecione a opcao que deseja realizar\n";
+                            cout<<"[0]Para para realizar um novo deposito\n"<<"[1]Atualizar balanco\n"<<"[2]Sair\n";
+                            cout<<"--> ";
+                            cin>>choice3;
+                            switch(choice3)
+                            {
+                                case 0:
+                                {
+                                   buyer.putmoney();
+                                   buyer.attbalance();
+                                   system("cls");
+                                   //Verificar como voltar para o menu normal
+                                }
+                                case 1:
+                                {
+                                    buyer.attbalance();
+                                }
+                                case 2:
+                                {
+                                    break;
+                                }
+
+                            }
                         }
                         else
                         {
@@ -58,8 +83,18 @@ int main()
                     }
                     case 1:
                     {
+                        User seller(custom);
+                        if(seller.login() == 1)
+                        {
+                            seller.showprofile();
+                            seller.attbalance();
 
-                        break;
+                        }
+                        else
+                        {
+                            cout<<"Infelizmente o perfil logado nao e de vendedor.\nVoce sera direcionado ao menu principal\n\n";
+                            break;
+                        }
                     }
                 }
             }

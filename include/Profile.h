@@ -50,6 +50,9 @@ class User: public Profile
         User(Profile per);
         void showprofile();
         bool login();
+        void attbalance();
+        void getbalance();
+        void putmoney();
         //+changeuserinfo()
         //+listcar()
         //+neworder()

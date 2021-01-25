@@ -61,6 +61,53 @@ int databaseidGEN(int sizearray)
     return id__ ;
 }
 
+int balancebasesize()
+{
+    int counter=0;
+    string i,b;
+    ifstream input("balancedatabase.txt");
+    while(input>>i>>b)
+    {
+        counter++;
+
+    }
+    input.close();
+    return counter;
+}
+
+int balancexists(int sizearray, int id__)
+{
+    int slidearray;
+    int counter = 0;
+    int arrayid[sizearray];
+    string i,b;
+
+
+    srand(time(0));
+    ifstream input("balancedatabase.txt");
+    while(input>>i>>b)
+    {
+        arrayid[counter] = stoi(i);
+        counter++;
+    }
+    do
+    {
+        slidearray = 0;
+
+        for(int i = 0; i < sizearray; ++i)
+        {
+            if(arrayid[i] != id__)
+            {
+                slidearray++;
+            }
+            else{return id__ ;}
+        }
+    } while (slidearray < sizearray-1);
+
+    input.close();
+    return -1 ;
+}
+
 Profile::Profile()
 {
     id=-1;
@@ -290,9 +337,97 @@ bool User::login()
 
 void User:: showprofile()
 {
-    person.showprofile();
+    getbalance();
     cout<<"O seu saldo e de RS:"<<balance<<"\n\n";
 }
 
+void User:: attbalance()
+{
+    int verifyexists;
+    string i,b;
 
-//Utilizar função virtual na chamada do balanço como classe mae para alterar e escrever na classe filha
+    verifyexists = balancexists(balancebasesize(), person.id);
+    if(verifyexists == -1)
+    {
+        ofstream reg("balancedatabase.txt", ios::app);
+        reg<<person.id<<' '<<balance<<endl;
+        reg.close();
+    }
+
+    else
+    {
+        ifstream originalF;
+        ofstream tempF;
+
+        originalF.open("balancedatabase.txt");
+        tempF.open("tempfile.txt");
+        while(originalF>>i>>b)
+        {
+            if(person.id == stoi(i))
+            {
+                tempF<<i<<' '<<balance<<endl;
+            }
+            else{tempF<<i<<' '<<b<<endl;}
+        }
+        originalF.close();
+        tempF.close();
+        remove("balancedatabase.txt");
+        rename("tempfile.txt","balancedatabase.txt");
+
+    }
+
+
+}
+
+void User:: putmoney()
+{
+    int cont = 0;
+    int ENTER = 13;
+    int TAB = 9;
+    int BKSP = 8;
+	char ch;
+	char pwd[20];
+    float newdeposit;
+
+    getbalance();
+    cout<<"\nQuanto voce deseja depositar: "<<endl;
+    cin>>newdeposit;
+    balance += newdeposit;
+    cout << "Por favor confirme sua senha: " ;
+	while(1){
+		ch = getch();
+
+		if(ch == ENTER || ch == TAB){
+			pwd[cont] = '\0';
+			break;
+		}else if(ch == BKSP){
+			if(cont > 0){
+				cont--;
+				printf("\b \b");
+			}
+		}else{
+			pwd[cont++] = ch;
+			printf("* \b");
+		}
+	}
+	cout<<"\nDeposito de: RS"<<newdeposit<<" confirmado\n";
+	cout<<"Seu novo saldo e de: RS"<<balance<<endl;
+	cin.get();
+	cin.get();
+
+}
+
+void User:: getbalance()
+{
+     string i,b;
+    person.showprofile();
+    ifstream reg("balancedatabase.txt", ios::app);
+         while(reg>>i>>b)
+            {
+                if(person.id == stoi(i))
+                {
+                    balance = stof(b);
+                }
+            }
+            reg.close();
+}
