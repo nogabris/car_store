@@ -2,27 +2,34 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="src\Profile.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5955" topLine="117" />
+			<Cursor1 position="2121" topLine="113" />
+		</Cursor>
+	</File>
+	<File name="include\Profile.h" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="576" topLine="11" />
+		</Cursor>
+	</File>
+	<File name="src\Profile.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6606" topLine="50" />
 		</Cursor>
 		<Folding>
 			<Collapse line="14" />
 			<Collapse line="28" />
 			<Collapse line="64" />
-			<Collapse line="80" />
-			<Collapse line="235" />
-			<Collapse line="250" />
+			<Collapse line="78" />
+			<Collapse line="111" />
+			<Collapse line="125" />
+			<Collapse line="142" />
+			<Collapse line="195" />
+			<Collapse line="297" />
+			<Collapse line="354" />
+			<Collapse line="365" />
+			<Collapse line="403" />
+			<Collapse line="441" />
 		</Folding>
-	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1146" topLine="18" />
-		</Cursor>
-	</File>
-	<File name="include\Profile.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="219" topLine="0" />
-		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

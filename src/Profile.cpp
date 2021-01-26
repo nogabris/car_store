@@ -122,6 +122,21 @@ Profile::Profile()
     profiletype = true;
 }
 
+void Profile::changes(int i,char u[20],char p[20],char cp[12],int ag, bool gd, bool pr)
+{
+    id=i;
+    strcpy(username,u);
+    strcpy(password, p);
+    strcpy(cpf, cp);
+    active = false;
+    age = ag;
+    /*TRUE = WOMAM / FALSE = MAN*/
+    gender = gd;
+    /*TRUE = user / FALSE = seller*/
+    profiletype = pr;
+}
+
+
 Profile::~Profile(){}
 
 void Profile:: createprofile()
@@ -177,7 +192,7 @@ void Profile:: createprofile()
     cout<<"Usuario: ("<<username<<") criado com sucesso\n\n";
 }
 
-bool Profile:: login()
+ bool Profile:: login()
 {
     int cont = 0;
     int ENTER = 13;
@@ -294,7 +309,7 @@ Car::Car()
 }
 Car::~Car(){}
 
-void Car:: newcar()
+void Car:: insertcar()
 {
     cout<<"Insira informacoes abaixo sobre o veiculo\n";
 
@@ -324,9 +339,15 @@ void Car:: newcar()
 
 }
 
+//User Functions
+User::User()
+{
+    balance = 3000;
+}
+
 User::User(Profile per)
 {
-    balance = 2000.00;
+    balance = 0;
     person = per;
 }
 
@@ -431,3 +452,12 @@ void User:: getbalance()
             }
             reg.close();
 }
+//End User Functions
+
+//Seller Functions
+Seller:: Seller(Profile per)
+{
+    User user_aux(per);
+    usr = user_aux;
+}
+

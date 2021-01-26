@@ -15,11 +15,13 @@ using namespace std;
 int main()
 {
     int run = 1;
+    int run2;
     int choice,choice2,choice3;
     Profile custom;
 
     while(run)
     {
+        run2 = 1;
         cout<<"Selecione a opcao que deseja realizar\n";
         cout<<"[1]Para criar um novo perfil\n"<< "[2]Para realizar Login\n" << "[3]Lista de carros\n"<<"[4]Para sair\n";
         cout<<"--> ";
@@ -41,35 +43,51 @@ int main()
                 cout<<"[0]Para logar como comprador\n"<<"[1]Para logar como vendedor\n";
                 cout<<"--> ";
                 cin>>choice2;
+                User mainusr(custom);
                 switch(choice2)
                 {
                     case 0:
                     {
-                        User buyer(custom);
-                        if(buyer.login() == 0)
+                        if(mainusr.login() == 0)
                         {
-                            buyer.showprofile();
-                            buyer.attbalance();
-                            cout<<"Selecione a opcao que deseja realizar\n";
-                            cout<<"[0]Para para realizar um novo deposito\n"<<"[1]Atualizar balanco\n"<<"[2]Sair\n";
-                            cout<<"--> ";
-                            cin>>choice3;
-                            switch(choice3)
+                            mainusr.showprofile();
+                            mainusr.attbalance();
+                            while(run2)
                             {
-                                case 0:
+                                mainusr.showprofile();
+                                cout<<"Selecione a opcao que deseja realizar\n";
+                                cout<<"[0]Para para realizar um novo deposito\n"<<"[1]Atualizar balanco\n"<<"[2]Sair\n";
+                                cout<<"--> ";
+                                cin>>choice3;
+                                switch(choice3)
                                 {
-                                   buyer.putmoney();
-                                   buyer.attbalance();
-                                   system("cls");
-                                   //Verificar como voltar para o menu normal
-                                }
-                                case 1:
-                                {
-                                    buyer.attbalance();
-                                }
-                                case 2:
-                                {
-                                    break;
+                                    case 0:
+                                    {
+                                       mainusr.putmoney();
+                                       mainusr.attbalance();
+                                       system("cls");
+                                       break;
+
+                                    }
+                                    case 1:
+                                    {
+                                        mainusr.attbalance();
+                                        system("cls");
+                                        cout<<"Saldo atualizado\n";
+                                        cin.get();
+                                        cin.get();
+
+                                        break;
+                                    }
+                                    case 2:
+                                    {
+                                        run2 = 0;
+                                        system("cls");
+                                        cout<<"Realizando Logout do perfil"<<endl;
+                                        cin.get();
+                                        cin.get();
+                                        break;
+                                    }
                                 }
 
                             }
@@ -83,12 +101,48 @@ int main()
                     }
                     case 1:
                     {
-                        User seller(custom);
+                        Seller seller(custom);
                         if(seller.login() == 1)
                         {
-                            seller.showprofile();
-                            seller.attbalance();
+                              while(run2)
+                            {
+                                seller.showprofile();
+                                cout<<"Selecione a opcao que deseja realizar\n";
+                                cout<<"[0]Para para realizar um novo deposito\n"<<"[1]Atualizar balanco\n"<<"[2]Sair\n";
+                                cout<<"--> ";
+                                cin>>choice3;
+                                switch(choice3)
+                                {
+                                    case 0:
+                                    {
+                                       seller.putmoney();
+                                       seller.attbalance();
+                                       system("cls");
+                                       break;
 
+                                    }
+                                    case 1:
+                                    {
+                                        seller.attbalance();
+                                        system("cls");
+                                        cout<<"Saldo atualizado\n";
+                                        cin.get();
+                                        cin.get();
+
+                                        break;
+                                    }
+                                    case 2:
+                                    {
+                                        run2 = 0;
+                                        system("cls");
+                                        cout<<"Realizando Logout do perfil"<<endl;
+                                        cin.get();
+                                        cin.get();
+                                        break;
+                                    }
+                                }
+
+                            }
                         }
                         else
                         {
@@ -112,6 +166,12 @@ int main()
                 break;
 
             }
+            default:
+                cout<<"Por Favor selecione uma opcao valida"<<endl;
+                cin.get();
+                cin.get();
+                system("cls");
+                break;
 
         }
     }
