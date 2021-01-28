@@ -34,6 +34,7 @@ int databaseidGEN(int sizearray)
     string i,u,p,cp,ag,gd,pt;
 
 
+
     srand(time(0));
     ifstream input("database.txt");
     while(input>>i>>u>>p>>cp>>ag>>gd>>pt)
@@ -107,6 +108,57 @@ int balancexists(int sizearray, int id__)
     input.close();
     return -1 ;
 }
+
+int carbasesize()
+{
+    int counter=0;
+    string idc, ids,susr,pr,mo,br,ye,ai,doo,ex,mot,fu,st;
+    ifstream input("CAR_database.txt");
+    while(input>>idc>>ids>>susr>>pr>>mo>>br>>ye>>ai>>doo>>ex>>mot>>fu>>st)
+    {
+        counter++;
+
+    }
+    input.close();
+    return counter;
+}
+
+int carbaseidGEN(int sizearray)
+{
+    int id__;
+    int slidearray;
+    int counter = 0;
+    int arrayid[sizearray];
+    string idc, ids,susr,pr,mo,br,ye,ai,doo,ex,mot,fu,st;
+
+
+    srand(time(0));
+    ifstream input("CAR_database.txt");
+    while(input>>idc>>ids>>susr>>pr>>mo>>br>>ye>>ai>>doo>>ex>>mot>>fu>>st)
+    {
+        arrayid[counter] = stoi(idc);
+        counter++;
+    }
+    do
+    {
+        id__ = rand() % 100 + 1;
+        slidearray = 0;
+
+        for(int i = 0; i < sizearray; ++i)
+        {
+            if(arrayid[i] != id__)
+            {
+                slidearray++;
+            }
+            else{break;}
+        }
+    } while (slidearray < sizearray-1);
+
+
+    input.close();
+    return id__ ;
+}
+
 
 Profile::Profile()
 {
@@ -297,6 +349,10 @@ void Profile:: showprofile()
 Car::Car()
 {
 
+    idcar = -1;
+    strcpy(seller_usr,"Nome do usuario");
+    idseller = -1;
+    price = 0;
     strcpy(model,"Modelo");
     strcpy(brand,"Marca");
     year = 0;
@@ -309,10 +365,15 @@ Car::Car()
 }
 Car::~Car(){}
 
-void Car:: insertcar()
+void Car:: insertcar(Profile person)
 {
+    idcar = carbaseidGEN(carbasesize());
+    idseller = person.id;
+    strcpy(seller_usr, person.username);
     cout<<"Insira informacoes abaixo sobre o veiculo\n";
 
+    cout<<"Preco: ";
+    cin>>price;
     cout<<"Modelo: ";
     cin>>model;
     cout<<"Marca: ";
@@ -333,10 +394,22 @@ void Car:: insertcar()
     cin>>state;
 
     ofstream reg("CAR_database.txt", ios::app);
-    reg<<model<<' '<<brand<<' '<<year<<' '<<airconditioner<<' '<<door<<' '<<exchange<<' '<<motor<<' '<<fuel<<' '<<state<<endl;
+    reg<<idcar<<' '<<idseller<<' '<<seller_usr<<' '<<price<<' '<<model<<' '<<brand<<' '<<year<<' '<<airconditioner<<' '<<door<<' '<<exchange<<' '<<motor<<' '<<fuel<<' '<<state<<endl;
     system("cls");
     cout<<"Carro: ("<<model<<" " << brand<<") inserido com sucesso\n\n";
 
+}
+
+void Car:: listcar()
+{
+    string idc, ids,susr,pr,mo,br,ye,ai,doo,ex,mot,fu,st;
+
+    cout<<"ID"<<"________|________"<<"Modelo"<<"________|________"<<"Proprietario"<<"________|________"<<"Preco"<<endl;
+    ifstream input("CAR_database.txt");
+    while(input>>idc>>ids>>susr>>pr>>mo>>br>>ye>>ai>>doo>>ex>>mot>>fu>>st)
+    {
+        cout<<idc<<"________|________"<<mo<<"________|________"<<susr<<"________|________"<<pr<<endl;
+    }
 }
 
 //User Functions
@@ -359,6 +432,7 @@ bool User::login()
 void User:: showprofile()
 {
     getbalance();
+    //person.showprofile();
     cout<<"O seu saldo e de RS:"<<balance<<"\n\n";
 }
 

@@ -56,7 +56,7 @@ int main()
                             {
                                 mainusr.showprofile();
                                 cout<<"Selecione a opcao que deseja realizar\n";
-                                cout<<"[0]Para para realizar um novo deposito\n"<<"[1]Atualizar balanco\n"<<"[2]Sair\n";
+                                cout<<"[0]Para para realizar um novo deposito\n"<<"[1]Atualizar balanco\n"<<"[2]Sair\n"<<"[3]Inserir um veiculo\n";
                                 cout<<"--> ";
                                 cin>>choice3;
                                 switch(choice3)
@@ -88,6 +88,17 @@ int main()
                                         cin.get();
                                         break;
                                     }
+                                    case 3:
+                                    {
+                                        Car carro;
+                                        system("cls");
+                                        //carro.insertcar(mainusr.person);
+                                        carro.listcar();
+                                        cin.get();
+                                        cin.get();
+                                        break;
+
+                                    }
                                 }
 
                             }
@@ -108,7 +119,7 @@ int main()
                             {
                                 seller.showprofile();
                                 cout<<"Selecione a opcao que deseja realizar\n";
-                                cout<<"[0]Para para realizar um novo deposito\n"<<"[1]Atualizar balanco\n"<<"[2]Sair\n";
+                                cout<<"[0]Para para realizar um novo deposito\n"<<"[1]Atualizar balanco\n"<<"[2]Sair\n"<<"[3]Inserir um veiculo\n";
                                 cout<<"--> ";
                                 cin>>choice3;
                                 switch(choice3)
@@ -136,6 +147,13 @@ int main()
                                         run2 = 0;
                                         system("cls");
                                         cout<<"Realizando Logout do perfil"<<endl;
+                                        cin.get();
+                                        cin.get();
+                                        break;
+                                    }
+                                    case 3:
+                                    {
+                                        cout<<"ESSE PE ID"<<seller.id;
                                         cin.get();
                                         cin.get();
                                         break;

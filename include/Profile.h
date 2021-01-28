@@ -4,6 +4,7 @@ class Profile
 {
     public:
         int id;
+        char username[20];
         Profile();
         void changes(int i,char u[20],char p[20],char cp[12],int ag, bool gd, bool pr);
         virtual ~Profile();
@@ -14,7 +15,6 @@ class Profile
 
 
     private:
-        char username[20];
         char password[20];
         char cpf[12];
         int age;
@@ -29,17 +29,16 @@ class Car
     public:
         Car();
         virtual ~Car();
-        void insertcar();
-        //+insertcar()
+        void insertcar(Profile person);
+        void listcar();
         //+neworder()
-        //+changecar()
-        //+listcar()
+
 
 
     private:
         int idcar;
         char seller_usr[20];
-        int idseller[20];
+        int idseller;
         float price;
         char model[20];
         char brand[20];
@@ -56,6 +55,7 @@ class Car
 class User: public Profile
 {
     public:
+        Profile person;
         User(Profile per);
         User();
         void showprofile();
@@ -68,7 +68,7 @@ class User: public Profile
 
     private:
         float balance;
-        Profile person;
+
 
 } ;
 
