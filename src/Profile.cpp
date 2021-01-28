@@ -602,7 +602,7 @@ void Purchase:: neworder(Car car, Profile per)
     ofstream reg("purchase_database.txt", ios::app);
     reg<<idbuy<<' '<<car.idcar<<' '<<per.id<<' '<<car.price<<' '<<"0"<<endl;
     system("cls");
-    cout<<"Nova oferta no Carro: ("<<car.id<<") realizada\nAguarde aprovacao do vendedor\n\n";
+    cout<<"Nova oferta no Carro: ("<<car.idcar<<") realizada\nAguarde aprovacao do vendedor\n\n";
 
 
 }

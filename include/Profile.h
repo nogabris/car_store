@@ -36,8 +36,8 @@ class Car
 
 
 
-    private:
 
+    private:
         char seller_usr[20];
         int idseller;
         float price;
@@ -50,6 +50,7 @@ class Car
         char motor [20];
         char fuel[20];
         char state[20];
+
 
 };
 
@@ -92,7 +93,7 @@ class Purchase
     public:
         int idbuy;
         Purchase();
-        void neworder();
+        void neworder(Car car, Profile per);
 
     private:
         User usr;

@@ -56,7 +56,7 @@ int main()
                             {
                                 mainusr.showprofile();
                                 cout<<"Selecione a opcao que deseja realizar\n";
-                                cout<<"[0]Para para realizar um novo deposito\n"<<"[1]Atualizar balanco\n"<<"[2]Sair\n"<<"[3]Inserir um veiculo\n";
+                                cout<<"[0]Para para realizar um novo deposito\n"<<"[1]Atualizar balanco\n"<<"[2]Sair\n"<<"[3]Inserir um veiculo\n"<<"[4]Realizar uma nova compra\n";
                                 cout<<"--> ";
                                 cin>>choice3;
                                 switch(choice3)
@@ -98,6 +98,12 @@ int main()
                                         cin.get();
                                         break;
 
+                                    }
+                                    case 4:
+                                    {
+                                        Car carro;
+                                        Purchase compra;
+                                        compra.neworder(carro,mainusr.person);
                                     }
                                 }
 
