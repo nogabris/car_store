@@ -159,6 +159,56 @@ int carbaseidGEN(int sizearray)
     return id__ ;
 }
 
+int purchasebasesize()
+{
+    int counter=0;
+    string IDBUY,IDCAR,IDSELLER,PRICE,VALIDATE;
+    ifstream input("database.txt");
+    while(input>>IDBUY>>IDCAR>>IDSELLER>>PRICE>>VALIDATE)
+    {
+        counter++;
+
+    }
+    input.close();
+    return counter;
+}
+
+int purchasebaseidGEN(int sizearray)
+{
+    int id__;
+    int slidearray;
+    int counter = 0;
+    int arrayid[sizearray];
+    string IDBUY,IDCAR,IDSELLER,PRICE,VALIDATE;
+
+
+
+    srand(time(0));
+    ifstream input("database.txt");
+    while(input>>IDBUY>>IDCAR>>IDSELLER>>PRICE>>VALIDATE)
+    {
+        arrayid[counter] = stoi(IDBUY);
+        counter++;
+    }
+    do
+    {
+        id__ = rand() % 100 + 1;
+        slidearray = 0;
+
+        for(int i = 0; i < sizearray; ++i)
+        {
+            if(arrayid[i] != id__)
+            {
+                slidearray++;
+            }
+            else{break;}
+        }
+    } while (slidearray < sizearray-1);
+
+
+    input.close();
+    return id__ ;
+}
 
 Profile::Profile()
 {
@@ -404,11 +454,14 @@ void Car:: listcar()
 {
     string idc, ids,susr,pr,mo,br,ye,ai,doo,ex,mot,fu,st;
 
-    cout<<"ID"<<"________|________"<<"Modelo"<<"________|________"<<"Proprietario"<<"________|________"<<"Preco"<<endl;
+    cout<<"###################################################"<<endl;
     ifstream input("CAR_database.txt");
     while(input>>idc>>ids>>susr>>pr>>mo>>br>>ye>>ai>>doo>>ex>>mot>>fu>>st)
     {
-        cout<<idc<<"________|________"<<mo<<"________|________"<<susr<<"________|________"<<pr<<endl;
+        cout<<"ID carro: "<<idc<<" Responsavel: "<<susr<<endl;
+        cout<<"Modelo: "<<mo<<" Marca: "<<br<<" Preco: RS"<<pr<<" Estado: "<<st<<endl;
+        cout<<"Motor: "<<mot<<" Ano: "<<ye<<" Ar Cond: "<<ai<<" "<<doo<<"Portas"<<" Combustivel: "<<fu<<endl;
+        cout<<"###################################################"<<endl;
     }
 }
 
@@ -534,4 +587,22 @@ Seller:: Seller(Profile per)
     User user_aux(per);
     usr = user_aux;
 }
+//End Seller Functions
 
+Purchase:: Purchase()
+{
+    idbuy = -1;
+    active = -1;
+}
+
+void Purchase:: neworder(Car car, Profile per)
+{
+
+    idbuy = purchasebaseidGEN(purchasebasesize());
+    ofstream reg("purchase_database.txt", ios::app);
+    reg<<idbuy<<' '<<car.idcar<<' '<<per.id<<' '<<car.price<<' '<<"0"<<endl;
+    system("cls");
+    cout<<"Nova oferta no Carro: ("<<car.id<<") realizada\nAguarde aprovacao do vendedor\n\n";
+
+
+}

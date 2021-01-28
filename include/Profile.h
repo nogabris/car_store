@@ -27,16 +27,17 @@ class Profile
 class Car
 {
     public:
+        int idcar;
         Car();
         virtual ~Car();
         void insertcar(Profile person);
         void listcar();
-        //+neworder()
+        //void neworder();
 
 
 
     private:
-        int idcar;
+
         char seller_usr[20];
         int idseller;
         float price;
@@ -82,5 +83,20 @@ class Seller: public User
 
     private:
         User usr;
+
+};
+
+class Purchase
+{
+
+    public:
+        int idbuy;
+        Purchase();
+        void neworder();
+
+    private:
+        User usr;
+        int active;
+
 
 };
