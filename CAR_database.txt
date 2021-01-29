@@ -1,6 +1,4 @@
-13 4 alexia 30000 HB20 Hyundai 2020 1 4 CVT 1.6 Gasolina Novo
-14 4 alexia 30000 HB20 Hyundai 2020 1 4 CVT 1.6 Gasolina Novo
-15 4 alexia 30000 HB20 Hyundai 2020 1 4 CVT 1.6 Gasolina Novo
-16 4 alexia 30000 HB20 Hyundai 2020 1 4 CVT 1.6 Gasolina Novo
-17 4 alexia 30000 HB20 Hyundai 2020 1 4 CVT 1.6 Gasolina Novo
-18 4 alexia 30000 HB20 Hyundai 2020 1 4 CVT 1.6 Gasolina Novo
+15 5 lucas 7000 Fusca Volskwagen 1999 0 4 Manual 1.0 Gasolina Novo
+16 5 lucas 90000 Captur Renault 2017 1 4 CVT 2.0 Flex Usado
+17 27 Marcos 5000 Celta Chevrolet 2002 1 4 Manual 1.0 Gasolina Usado
+8 50 willian 20000 Gol Volkswagen 2013 0 4 Manual 1.0 Flex Usado

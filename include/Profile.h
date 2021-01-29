@@ -11,6 +11,7 @@ class Profile
         void createprofile();
         bool login();
         void showprofile();
+        void selectprofile(int inp_id);
 
 
 
@@ -32,12 +33,9 @@ class Car
         virtual ~Car();
         void insertcar(Profile person);
         void listcar();
+        void selectcar(int inp_idcar);
         //void neworder();
 
-
-
-
-    private:
         char seller_usr[20];
         int idseller;
         float price;
@@ -52,6 +50,12 @@ class Car
         char state[20];
 
 
+
+
+    private:
+
+
+
 };
 
 class User: public Profile
@@ -61,14 +65,18 @@ class User: public Profile
         User(Profile per);
         User();
         void showprofile();
+        void selectuser(int inp_idperson);
         bool login();
         void attbalance();
-        void getbalance();
+        float getbalance();
         void putmoney();
+        void adjustbalance(int type, float correction);
+        User operator+(float bal);
+        User operator-(float bal);
         //+listcar()
         //+neworder()
 
-    private:
+    protected:
         float balance;
 
 
@@ -87,17 +95,28 @@ class Seller: public User
 
 };
 
-class Purchase
+class Purchase: public User, Car
 {
 
     public:
         int idbuy;
         Purchase();
-        void neworder(Car car, Profile per);
+        void neworder(Car car,User usr);
+        void offerlist(User usr);
+        void selectpurchase(int inp_id);
+        void confirmbuy(User usr);
+        int active;
+        int ID__BUY;
+        int ID__CAR;
+        int ID__SELLER;
+        int ID__BUYER;
+        float OF__FER;
+        float PR__ICE;
+
+
 
     private:
         User usr;
-        int active;
 
 
 };

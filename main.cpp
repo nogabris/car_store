@@ -56,7 +56,7 @@ int main()
                             {
                                 mainusr.showprofile();
                                 cout<<"Selecione a opcao que deseja realizar\n";
-                                cout<<"[0]Para para realizar um novo deposito\n"<<"[1]Atualizar balanco\n"<<"[2]Sair\n"<<"[3]Inserir um veiculo\n"<<"[4]Realizar uma nova compra\n";
+                                cout<<"[0]Para para realizar um novo deposito\n"<<"[1]Atualizar balanco\n"<<"[2]Sair\n"<<"[3]Inserir um veiculo\n"<<"[4]Realizar uma nova compra\n"<<"[5]Lista de carros\n"<<"[6]Lista de ofertas nos veículos\n"<<"[7]Confirmar compra\n";
                                 cout<<"--> ";
                                 cin>>choice3;
                                 switch(choice3)
@@ -92,8 +92,7 @@ int main()
                                     {
                                         Car carro;
                                         system("cls");
-                                        //carro.insertcar(mainusr.person);
-                                        carro.listcar();
+                                        carro.insertcar(mainusr.person);
                                         cin.get();
                                         cin.get();
                                         break;
@@ -103,8 +102,40 @@ int main()
                                     {
                                         Car carro;
                                         Purchase compra;
-                                        compra.neworder(carro,mainusr.person);
+                                        system("cls");
+                                        compra.neworder(carro,mainusr);
+                                        cin.get();
+                                        cin.get();
+                                        break;
                                     }
+                                    case 5:
+                                    {
+                                        Car carro;
+                                        system("cls");
+                                        carro.listcar();
+                                        cin.get();
+                                        cin.get();
+                                        break;
+                                    }
+                                    case 6:
+                                    {
+                                        Purchase compra;
+                                        system("cls");
+                                        compra.offerlist(mainusr);
+                                        cin.get();
+                                        cin.get();
+                                        break;
+                                    }
+                                     case 7:
+                                    {
+                                        Purchase compra;
+                                        system("cls");
+                                        compra.confirmbuy(mainusr);
+                                        cin.get();
+                                        cin.get();
+                                        break;
+                                    }
+
                                 }
 
                             }
@@ -132,7 +163,7 @@ int main()
                                 {
                                     case 0:
                                     {
-                                       seller.putmoney();
+                                       //seller.putmoney();
                                        seller.attbalance();
                                        system("cls");
                                        break;
@@ -179,9 +210,12 @@ int main()
                 break;
             case 3:
             {
+                Car carro;
                 system("cls");
-                cout<<"Lista de carros\n";
-                break;
+                carro.listcar();
+                cin.get();
+                cin.get();
+                break;;
             }
             case 4:
             {
