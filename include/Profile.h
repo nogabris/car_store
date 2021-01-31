@@ -1,12 +1,32 @@
 #define PROFILE_H
 
+class Basicwarnings
+{
+    public:
+        Basicwarnings();
+        virtual void enterbtn();
+        virtual void msgtoshow(char msg[100]);
+    private:
+        char message[100];
+};
+
+class Basicommands: public Basicwarnings
+{
+    public:
+        Basicommands();
+        void enterbtn();
+        void msgtoshow(char msg[100]);
+    private:
+        int btntosave;
+
+};
+
 class Profile
 {
     public:
         int id;
         char username[20];
         Profile();
-        void changes(int i,char u[20],char p[20],char cp[12],int ag, bool gd, bool pr);
         virtual ~Profile();
         void createprofile();
         bool login();
@@ -17,7 +37,7 @@ class Profile
 
     private:
         char password[20];
-        char cpf[12];
+        char cpf[20];
         int age;
         bool gender;
         bool profiletype;
@@ -34,7 +54,7 @@ class Car
         void insertcar(Profile person);
         void listcar();
         void selectcar(int inp_idcar);
-        //void neworder();
+
 
         char seller_usr[20];
         int idseller;
@@ -49,12 +69,7 @@ class Car
         char fuel[20];
         char state[20];
 
-
-
-
     private:
-
-
 
 };
 
@@ -73,8 +88,7 @@ class User: public Profile
         void adjustbalance(int type, float correction);
         User operator+(float bal);
         User operator-(float bal);
-        //+listcar()
-        //+neworder()
+
 
     protected:
         float balance;
@@ -82,29 +96,12 @@ class User: public Profile
 
 } ;
 
-class Seller: public User
-{
-    public:
-        Seller(Profile per);
-        //+listcar()
-        //+insertcar()
-        //+changecar()
-
-    private:
-        User usr;
-
-};
 
 class Purchase: public User, Car
 {
 
     public:
         int idbuy;
-        Purchase();
-        void neworder(Car car,User usr);
-        void offerlist(User usr);
-        void selectpurchase(int inp_id);
-        void confirmbuy(User usr);
         int active;
         int ID__BUY;
         int ID__CAR;
@@ -113,10 +110,16 @@ class Purchase: public User, Car
         float OF__FER;
         float PR__ICE;
 
+        Purchase();
+        void neworder(Car car,User usr);
+        void offerlist(User usr);
+        void selectpurchase(int inp_id);
+        void confirmbuy(User usr);
 
 
     private:
         User usr;
 
-
 };
+
+

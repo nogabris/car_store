@@ -220,7 +220,7 @@ void updatingofferlist(int id_inp)
     tempF.open("tempfile.txt");
     while(originalF>>IDBUY>>IDCAR>>IDSELLER>>IDBUYER>>OFFER>>PRICE)
     {
-        if(stoi(IDBUY) != id_inp)
+        if(stoi(IDCAR) != id_inp)
         {
             tempF<<IDBUY<<' '<<IDCAR<<' '<<IDSELLER<<' '<<IDBUYER<<' '<<OFFER<<' '<<PRICE<<endl;
         }
@@ -267,20 +267,6 @@ Profile::Profile()
     profiletype = true;
 }
 
-void Profile::changes(int i,char u[20],char p[20],char cp[12],int ag, bool gd, bool pr)
-{
-    id=i;
-    strcpy(username,u);
-    strcpy(password, p);
-    strcpy(cpf, cp);
-    active = false;
-    age = ag;
-    /*TRUE = WOMAM / FALSE = MAN*/
-    gender = gd;
-    /*TRUE = user / FALSE = seller*/
-    profiletype = pr;
-}
-
 Profile::~Profile(){}
 
 void Profile:: createprofile()
@@ -316,7 +302,7 @@ void Profile:: createprofile()
     strcpy(password,pwd);
 
 
-    cout << "\nDigite seu CPF(sem tracos ou espacos) : " << "\n";
+    cout << "\nDigite seu CPF(sem tracos ou espacos): " << "\n";
     cin>>cpf;
 
     cout << "Digite sua idade: " << "\n";
@@ -325,8 +311,7 @@ void Profile:: createprofile()
     cout << "Digite seu genero (0 para homem | 1 para mulher ): " << "\n";
     cin >> gender;
 
-    cout << "Digite seu perfil (0 para comprador | 1 para vendedor) " << "\n";
-    cin >> profiletype;
+    profiletype = 0;
 
     id = databaseidGEN(databasesize());
 
@@ -417,12 +402,7 @@ void Profile:: showprofile()
     }
     else{strcpy(genderstring,"Feminino");}
 
-    if(profiletype==0)
-    {
-        strcpy(profilestring,"Comprador/(a)");
-    }
-    else{strcpy(profilestring,"Vendedor/(a)");}
-
+    strcpy(profilestring,"Comprador/Vendedor");
 
 
     if(active)
@@ -488,12 +468,12 @@ void Car:: insertcar(Profile person)
     strcpy(seller_usr, person.username);
     cout<<"Insira informacoes abaixo sobre o veiculo\n";
 
-    cout<<"Preco: ";
-    cin>>price;
     cout<<"Modelo: ";
     cin>>model;
     cout<<"Marca: ";
     cin>>brand;
+    cout<<"Preco: ";
+    cin>>price;
     cout<<"Ano: ";
     cin>>year;
     cout<<"Ar condiocionado: ";
@@ -609,7 +589,6 @@ bool User::login()
 void User:: showprofile()
 {
     getbalance();
-    //person.showprofile();
     cout<<"O seu saldo e de RS:"<<balance<<"\n\n";
 }
 
@@ -749,14 +728,7 @@ void User:: adjustbalance(int type, float correction)
 }
 //End User Functions
 
-//Seller Functions
-Seller:: Seller(Profile per)
-{
-    User user_aux(per);
-    usr = user_aux;
-}
-//End Seller Functions
-
+//Purchase Functions
 Purchase:: Purchase()
 {
     idbuy = -1;
@@ -863,6 +835,7 @@ void Purchase:: selectpurchase(int inp_id)
     }
 }
 
+
 void Purchase:: confirmbuy(User seller)
 {
     int id_confirm;
@@ -885,15 +858,47 @@ void Purchase:: confirmbuy(User seller)
     buyer.adjustbalance(-1,original_buy.OF__FER);
     buyer.attbalance();
     //Remove lines from offer list
-    updatingofferlist(id_confirm);
+    updatingofferlist(original_buy.ID__CAR);
     //remove lines from car list;
     updatingcarlist(original_buy.ID__CAR);
 
-
-
-
 }
 
+//End purchase functions
+
+Basicwarnings::Basicwarnings()
+{
+    strcpy(message,"Insira sua mensagem");
+}
+
+void Basicwarnings::enterbtn()
+{
+    cout<<"Pressione ENTER";
+}
+
+void Basicwarnings:: msgtoshow(char msg[100])
+{
+    strcpy(message,msg);
+}
+
+
+Basicommands::Basicommands()
+{
+    btntosave = -1;
+}
+
+void Basicommands::enterbtn()
+{
+    cin.get();
+    cin.get();
+}
+
+void Basicommands:: msgtoshow(char msg[100])
+{
+    cout<<msg<<endl;
+    system("cls");
+
+}
 
 
 

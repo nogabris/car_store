@@ -16,8 +16,12 @@ int main()
 {
     int run = 1;
     int run2;
-    int choice,choice2,choice3;
+    int choice,choice3;
     Profile custom;
+    Basicwarnings *pvirtual;
+    Basicommands command;
+
+    pvirtual = &command;
 
     while(run)
     {
@@ -40,172 +44,106 @@ int main()
             case 2:
             {
                 system("cls");
-                cout<<"[0]Para logar como comprador\n"<<"[1]Para logar como vendedor\n";
-                cout<<"--> ";
-                cin>>choice2;
+                cout<<"Inicializando sistema, realize o login e aguarde\n";
+                pvirtual->enterbtn();
                 User mainusr(custom);
-                switch(choice2)
+                mainusr.login();
+                mainusr.showprofile();
+                mainusr.attbalance();
+                while(run2)
                 {
-                    case 0:
+                    mainusr.showprofile();
+                    cout<<"Selecione a opcao que deseja realizar\n";
+                    cout<<"[0]Para para realizar um novo deposito\n";
+                    cout<<"[1]Atualizar balanco\n";
+                    cout<<"[2]Lista de carros\n";
+                    cout<<"[3]Inserir um veiculo\n";
+                    cout<<"[4]Realizar uma nova compra\n";
+                    cout<<"[5]Propostas recebidas\n";
+                    cout<<"[6]Confirmar proposta\n";
+                    cout<<"[7]Logout\n";
+                    cout<<"--> ";
+                    cin>>choice3;
+                    switch(choice3)
                     {
-                        if(mainusr.login() == 0)
+                        case 0://putmoney
                         {
-                            mainusr.showprofile();
+                           mainusr.putmoney();
+                           mainusr.attbalance();
+                           system("cls");
+                           break;
+
+                        }
+                        case 1://attbalance
+                        {
                             mainusr.attbalance();
-                            while(run2)
-                            {
-                                mainusr.showprofile();
-                                cout<<"Selecione a opcao que deseja realizar\n";
-                                cout<<"[0]Para para realizar um novo deposito\n"<<"[1]Atualizar balanco\n"<<"[2]Sair\n"<<"[3]Inserir um veiculo\n"<<"[4]Realizar uma nova compra\n"<<"[5]Lista de carros\n"<<"[6]Lista de ofertas nos veículos\n"<<"[7]Confirmar compra\n";
-                                cout<<"--> ";
-                                cin>>choice3;
-                                switch(choice3)
-                                {
-                                    case 0:
-                                    {
-                                       mainusr.putmoney();
-                                       mainusr.attbalance();
-                                       system("cls");
-                                       break;
+                            system("cls");
+                            cout<<"Saldo atualizado\n";
+                            pvirtual->enterbtn();
 
-                                    }
-                                    case 1:
-                                    {
-                                        mainusr.attbalance();
-                                        system("cls");
-                                        cout<<"Saldo atualizado\n";
-                                        cin.get();
-                                        cin.get();
-
-                                        break;
-                                    }
-                                    case 2:
-                                    {
-                                        run2 = 0;
-                                        system("cls");
-                                        cout<<"Realizando Logout do perfil"<<endl;
-                                        cin.get();
-                                        cin.get();
-                                        break;
-                                    }
-                                    case 3:
-                                    {
-                                        Car carro;
-                                        system("cls");
-                                        carro.insertcar(mainusr.person);
-                                        cin.get();
-                                        cin.get();
-                                        break;
-
-                                    }
-                                    case 4:
-                                    {
-                                        Car carro;
-                                        Purchase compra;
-                                        system("cls");
-                                        compra.neworder(carro,mainusr);
-                                        cin.get();
-                                        cin.get();
-                                        break;
-                                    }
-                                    case 5:
-                                    {
-                                        Car carro;
-                                        system("cls");
-                                        carro.listcar();
-                                        cin.get();
-                                        cin.get();
-                                        break;
-                                    }
-                                    case 6:
-                                    {
-                                        Purchase compra;
-                                        system("cls");
-                                        compra.offerlist(mainusr);
-                                        cin.get();
-                                        cin.get();
-                                        break;
-                                    }
-                                     case 7:
-                                    {
-                                        Purchase compra;
-                                        system("cls");
-                                        compra.confirmbuy(mainusr);
-                                        cin.get();
-                                        cin.get();
-                                        break;
-                                    }
-
-                                }
-
-                            }
-                        }
-                        else
-                        {
-                            cout<<"Infelizmente o perfil logado nao e de comprador.\nVoce sera direcionado ao menu principal\n\n";
                             break;
                         }
-                        break;
-                    }
-                    case 1:
-                    {
-                        Seller seller(custom);
-                        if(seller.login() == 1)
+                        case 2://Car list
                         {
-                              while(run2)
-                            {
-                                seller.showprofile();
-                                cout<<"Selecione a opcao que deseja realizar\n";
-                                cout<<"[0]Para para realizar um novo deposito\n"<<"[1]Atualizar balanco\n"<<"[2]Sair\n"<<"[3]Inserir um veiculo\n";
-                                cout<<"--> ";
-                                cin>>choice3;
-                                switch(choice3)
-                                {
-                                    case 0:
-                                    {
-                                       //seller.putmoney();
-                                       seller.attbalance();
-                                       system("cls");
-                                       break;
+                            Car carro;
+                            system("cls");
+                            carro.listcar();
+                            pvirtual->enterbtn();
+                            break;
 
-                                    }
-                                    case 1:
-                                    {
-                                        seller.attbalance();
-                                        system("cls");
-                                        cout<<"Saldo atualizado\n";
-                                        cin.get();
-                                        cin.get();
-
-                                        break;
-                                    }
-                                    case 2:
-                                    {
-                                        run2 = 0;
-                                        system("cls");
-                                        cout<<"Realizando Logout do perfil"<<endl;
-                                        cin.get();
-                                        cin.get();
-                                        break;
-                                    }
-                                    case 3:
-                                    {
-                                        cout<<"ESSE PE ID"<<seller.id;
-                                        cin.get();
-                                        cin.get();
-                                        break;
-                                    }
-                                }
-
-                            }
                         }
-                        else
+                        case 3://Insert car
                         {
-                            cout<<"Infelizmente o perfil logado nao e de vendedor.\nVoce sera direcionado ao menu principal\n\n";
+                            Car carro;
+                            system("cls");
+                            carro.insertcar(mainusr.person);
+                            pvirtual->enterbtn();
+                            break;
+
+                        }
+                        case 4://New buy
+                        {
+                            Car carro;
+                            Purchase compra;
+                            system("cls");
+                            compra.neworder(carro,mainusr);
+                            pvirtual->enterbtn();
                             break;
                         }
+                        case 5://Offer list
+                        {
+                            Purchase compra;
+                            system("cls");
+                            compra.offerlist(mainusr);
+                            pvirtual->enterbtn();
+                            break;
+                        }
+                        case 6://Confirm Buy
+                        {
+                            Purchase compra;
+                            system("cls");
+                            compra.confirmbuy(mainusr);
+                            pvirtual->enterbtn();
+                            break;
+
+                        }
+                         case 7://Exit
+                        {
+                            run2 = 0;
+                            system("cls");
+                            cout<<"Realizando Logout do perfil"<<endl;
+                            pvirtual->enterbtn();
+                            break;
+                        }
+
                     }
+
                 }
+
+                break;
+
+
+
             }
                 break;
             case 3:
@@ -213,8 +151,7 @@ int main()
                 Car carro;
                 system("cls");
                 carro.listcar();
-                cin.get();
-                cin.get();
+                pvirtual->enterbtn();
                 break;;
             }
             case 4:
@@ -226,8 +163,7 @@ int main()
             }
             default:
                 cout<<"Por Favor selecione uma opcao valida"<<endl;
-                cin.get();
-                cin.get();
+                pvirtual->enterbtn();
                 system("cls");
                 break;
 
